@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陳安婧 Hannah - 企業管理專家</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a365d',
+                        secondary: '#2b6cb0',
+                        accent: '#f6ad55',
+                        light: '#f7fafc',
+                        dark: '#2d3748'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif']
+                    },
+                    boxShadow: {
+                        'custom': '0 4px 20px 0 rgba(0, 0, 0, 0.1)',
+                        'hover': '0 10px 30px 0 rgba(0, 0, 0, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            }
+            .bg-glass {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .section-padding {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+            }
+        }
+        
+        /* Custom Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.9)), url('https://p11-doubao-search-sign.byteimg.com/labis/cb2685f865c0afcd1ff7fea0690f9f31~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792588990&x-signature=VlsUW9L%2BodXdVv%2BpaIGHYXjy2Z4%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .section-divider {
+            height: 3px;
+            width: 50px;
+            background-color: #f6ad55;
+            margin: 1.5rem auto;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #2b6cb0;
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background-color: #f6ad55;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #2b6cb0;
+            transition: width 1.5s ease;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-glass border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-primary">Hannah<span class="text-secondary">.Chen</span></a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-secondary transition-all-300">關於我</a>
+                    <a href="#expertise" class="text-gray-700 hover:text-secondary transition-all-300">專業領域</a>
+                    <a href="#experience" class="text-gray-700 hover:text-secondary transition-all-300">工作經歷</a>
+                    <a href="#education" class="text-gray-700 hover:text-secondary transition-all-300">教育背景</a>
+                    <a href="#certifications" class="text-gray-700 hover:text-secondary transition-all-300">證照</a>
+                    <a href="#contact" class="text-gray-700 hover:text-secondary transition-all-300">聯繫方式</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 h-full w-3/4 bg-white shadow-lg z-50 p-5">
+            <div class="flex justify-between items-center mb-8">
+                <a href="#" class="text-2xl font-bold text-primary">Hannah<span class="text-secondary">.Chen</span></a>
+                <button id="close-menu" class="text-gray-700 focus:outline-none">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-gray-700 hover:text-secondary transition-all-300 py-2 border-b border-gray-200">關於我</a>
+                <a href="#expertise" class="text-gray-700 hover:text-secondary transition-all-300 py-2 border-b border-gray-200">專業領域</a>
+                <a href="#experience" class="text-gray-700 hover:text-secondary transition-all-300 py-2 border-b border-gray-200">工作經歷</a>
+                <a href="#education" class="text-gray-700 hover:text-secondary transition-all-300 py-2 border-b border-gray-200">教育背景</a>
+                <a href="#certifications" class="text-gray-700 hover:text-secondary transition-all-300 py-2 border-b border-gray-200">證照</a>
+                <a href="#contact" class="text-gray-700 hover:text-secondary transition-all-300 py-2">聯繫方式</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 py-16">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 text-shadow">
+                        陳安婧 <span class="text-accent">Hannah</span>
+                    </h1>
+                    <h2 class="text-xl md:text-2xl text-gray-200 mb-6">
+                        企業管理碩士學位 | 國際工商管理政策研究學者
+                    </h2>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        專注於企業規劃、人員調配管理，深耕人力資源策略規劃與組織發展管理領域。
+                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="#about" class="bg-secondary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all-300 shadow-lg hover:shadow-xl">
+                            了解更多
+                        </a>
+                        <a href="#contact" class="bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-lg transition-all-300 hover:bg-white hover:text-primary">
+                            聯繫我
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                            <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/f6040e3b097a4624a84513e99a0c6b11.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=8a172a1a&x-expires=1777641764&x-signature=EpuNjg2JiGClGEl94rI0rP14D3I%3D" 
+                                 alt="陳安婧 Hannah" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-accent text-white rounded-full w-24 h-24 flex items-center justify-center shadow-lg">
+                            <div class="text-center">
+                                <div class="text-xl font-bold">36</div>
+                                <div class="text-xs">歲</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">關於我</h2>
+                <div class="section-divider"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">了解更多關於我的專業背景與個人特質</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-2/3" data-aos="fade-right">
+                    <p class="text-lg mb-6 leading-relaxed">
+                        陳安婧（Hannah），現年36歲，畢業於美國斯坦福大學，資深企業管理專家、擁有企業管理學位，同時也是國際工商管理政策研究學者。
+                    </p>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        長期深耕人力資源策略規劃與組織發展管理、跨區域人力資源配置與國際化人才管理、組織診斷與人力結構優化能力領域，具備國際化學術視野與紮實的勞動法規與用工風險控管研究底蘊。
+                    </p>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        擅長薪酬福利體系設計與績效管理機制建構、人才招募、培育與留任策略制定、人力資源數據分析與決策支持能力，結合宏觀經濟趨勢進行人力資源規劃與風險預判。
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        以客觀專業的人力資源視角，輸出高品質組織與人才分析洞察，持續提供前瞻性人力資源策略建議，為企業人才發展、組織優化與人資決策提供具體且具價值的支持。
+                    </p>
+                </div>
+                
+                <div class="md:w-1/3" data-aos="fade-left">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-custom">
+                        <h3 class="text-xl font-bold text-primary mb-4">個人資訊</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-user-circle text-secondary mt-1 mr-3"></i>
+                                <div>
+                                    <span class="font-semibold">姓名：</span>
+                                    <span>陳安婧 (Hannah)</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-graduation-cap text-secondary mt-1 mr-3"></i>
+                                <div>
+                                    <span class="font-semibold">學位：</span>
+                                    <span>企業管理碩士</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-briefcase text-secondary mt-1 mr-3"></i>
+                                <div>
+                                    <span class="font-semibold">專業：</span>
+                                    <span>人力資源管理、組織發展</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-globe text-secondary mt-1 mr-3"></i>
+                                <div>
+                                    <span class="font-semibold">語言：</span>
+                                    <span>中文、英文</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-map-marker text-secondary mt-1 mr-3"></i>
+                                <div>
+                                    <span class="font-semibold">所在地：</span>
+                                    <span>韓國首爾江南區</span>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-bold text-primary mb-3">核心能力</h4>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>人力資源策略規劃</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%;" data-width="95%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1">
+                                    <span>組織發展管理</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%;" data-width="90%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1">
+                                    <span>薪酬福利體系設計</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%;" data-width="85%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1">
+                                    <span>跨文化人才管理</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%;" data-width="88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">專業領域</h2>
+                <div class="section-divider"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">我的核心專業技能與服務範疇</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Expertise Item 1 -->
+                <div class="bg-white rounded-lg shadow-custom p-6 card-hover transition-all-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d1d0d5b9ee2841c595e45087b85da1ec~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=f06b921b&x-expires=1779629035&x-signature=KWJyV14%2FRHongH8XvolBscZDu%2B8%3D" 
+                             alt="全球企業管理分析" 
+                             class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">全球企業管理分析</h3>
+                    <p class="text-gray-600">
+                        深入分析組織發展趨勢與人力資源運作規律，關注企業內外部環境變化及其對人才策略的影響，建立系統化的人力資源分析框架與預測模型，支援企業在人力規劃、組織優化與決策上的精準判斷。
+                    </p>
+                </div>
+                
+                <!-- Expertise Item 2 -->
+                <div class="bg-white rounded-lg shadow-custom p-6 card-hover transition-all-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d1d0d5b9ee2841c595e45087b85da1ec~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=f06b921b&x-expires=1779629035&x-signature=KWJyV14%2FRHongH8XvolBscZDu%2B8%3D" 
+                             alt="結構分析＋影響判讀" 
+                             class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">結構分析＋影響判讀</h3>
+                    <p class="text-gray-600">
+                        專注於人力資源制度與機制優化，涵蓋薪酬結構設計、績效評估體系與激勵機制建構，並分析企業內外部環境變化對人才流動與組織運作的影響，提升整體人力資源配置效率與組織競爭力。
+                    </p>
+                </div>
+                
+                <!-- Expertise Item 3 -->
+                <div class="bg-white rounded-lg shadow-custom p-6 card-hover transition-all-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d1d0d5b9ee2841c595e45087b85da1ec~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=f06b921b&x-expires=1779629035&x-signature=KWJyV14%2FRHongH8XvolBscZDu%2B8%3D" 
+                             alt="跨區域人力資源" 
+                             class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">跨區域人力資源</h3>
+                    <p class="text-gray-600">
+                        專注於企業跨區域人力資源流動與全球化人才配置，研究組織在不同市場環境下的人才管理模式與發展策略，關注數字化與科技變革對人力資源管理的影響，優化企業全球人才競爭力與組織管理效能。
+                    </p>
+                </div>
+                
+                <!-- Expertise Item 4 -->
+                <div class="bg-white rounded-lg shadow-custom p-6 card-hover transition-all-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d1d0d5b9ee2841c595e45087b85da1ec~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=f06b921b&x-expires=1779629035&x-signature=KWJyV14%2FRHongH8XvolBscZDu%2B8%3D" 
+                             alt="企業管理分析" 
+                             class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">企業管理分析</h3>
+                    <p class="text-gray-600">
+                        構建人力資源數據監測與分析指標體系，持續追蹤組織人力結構與人才流動狀況，識別企業人力資源配置所處階段與關鍵變化趨勢，並對人力需求變動及組織調整節點進行預判，支持管理層制定相應策略。
+                    </p>
+                </div>
+                
+                <!-- Expertise Item 5 -->
+                <div class="bg-white rounded-lg shadow-custom p-6 card-hover transition-all-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d1d0d5b9ee2841c595e45087b85da1ec~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=f06b921b&x-expires=1779629035&x-signature=KWJyV14%2FRHongH8XvolBscZDu%2B8%3D" 
+                             alt="區域人才發展規劃" 
+                             class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">區域人才發展規劃</h3>
+                    <p class="text-gray-600">
+                        結合不同區域業務特點與企業全球化發展趨勢，為組織人力資源戰略提供規劃支持，參與人才結構設計與關鍵崗位布局，並提出組織發展與人力資源管理優化建議，支撐企業在不同區域市場的發展。
+                    </p>
+                </div>
+                
+                <!-- Expertise Item 6 -->
+                <div class="bg-white rounded-lg shadow-custom p-6 card-hover transition-all-300" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d1d0d5b9ee2841c595e45087b85da1ec~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604242122445B89025426C283E8FC95&rrcfp=f06b921b&x-expires=1779629035&x-signature=KWJyV14%2FRHongH8XvolBscZDu%2B8%3D" 
+                             alt="人才管理風險防控" 
+                             class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">人才管理風險防控</h3>
+                    <p class="text-gray-600">
+                        識別與評估企業人力資源管理中的系統性風險，構建人力風險監測與預警機制，持續追蹤組織變動、人才流失及用工合規等關鍵風險因素，研究風險傳導路徑與應對策略，提升企業人力資源管理的穩定性。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">榮譽與成就</h2>
+                <div class="section-divider"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">我的專業榮譽與學術成就</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- Experience Item 1 -->
+                <div class="timeline-item pb-8" data-aos="fade-up">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-custom">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-primary">斯坦福企業管理學年度傑出學者獎</h3>
+                            <span class="text-secondary font-semibold">2023年</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">斯坦福大學</h4>
+                        <p class="text-gray-600">
+                            因在人力資源管理領域的創新實踐與專業貢獻受到肯定，特別是在組織人才體系優化與人力資源制度設計方面取得突破性成果，有效提升企業人才管理效率與組織運作水平。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Experience Item 2 -->
+                <div class="timeline-item pb-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-custom">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-primary">全球企業管理學會研究成就榮譽勳章</h3>
+                            <span class="text-secondary font-semibold">2022年</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">全球企業管理學會</h4>
+                        <p class="text-gray-600">
+                            授予在企業管理學研究領域做出傑出貢獻的學者，以表彰其在企業管理政策研究方面的卓越成就。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Experience Item 3 -->
+                <div class="timeline-item pb-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-custom">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-primary">美國企業管理研究學會青年經濟領袖獎</h3>
+                            <span class="text-secondary font-semibold">2021年</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">美國企業管理研究學會</h4>
+                        <p class="text-gray-600">
+                            表彰在企業管理學領域具有領導潛力的青年學者，認可其在全球企業管理研究方面的創新方法。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Experience Item 4 -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-custom">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-primary">全球企業管理論壇傑出研究貢獻獎</h3>
+                            <span class="text-secondary font-semibold">2020年</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">全球企業管理論壇</h4>
+                        <p class="text-gray-600">
+                            表彰在全球企業政策研究領域的傑出貢獻，特別是在人才管理和風險管理研究方面的創新成果。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">教育背景</h2>
+                <div class="section-divider"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">我的學術背景與學習經歷</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- Education Item 1 -->
+                <div class="timeline-item pb-8" data-aos="fade-up">
+                    <div class="bg-white p-6 rounded-lg shadow-custom">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-primary">企業管理碩士學位</h3>
+                            <span class="text-secondary font-semibold">2018 - 2020</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">斯坦福大學</h4>
+                        <p class="text-gray-600">
+                            主修人力資源管理與組織發展，碩士論文《人力資源管理體系優化與組織穩定性建設》獲得優秀論文獎，以一級榮譽畢業。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Education Item 2 -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white p-6 rounded-lg shadow-custom">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-primary">工商管理學士學位</h3>
+                            <span class="text-secondary font-semibold">2014 - 2018</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">哈佛大學</h4>
+                        <p class="text-gray-600">
+                            主修企業管理，輔修心理學，畢業論文《跨文化人力資源管理挑戰與對策》獲得系級優秀論文獎。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">專業證照</h2>
+                <div class="section-divider"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">我的專業認證與資格證明</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Certification Item 1 -->
+                <div class="bg-gray-50 rounded-lg shadow-custom p-6 text-center card-hover transition-all-300" data-aos="fade-up">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-graduation-cap text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">MBA</h3>
+                    <p class="text-gray-600">
+                        工商管理碩士<br>
+                        人力資源管理領域
+                    </p>
+                </div>
+                
+                <!-- Certification Item 2 -->
+                <div class="bg-gray-50 rounded-lg shadow-custom p-6 text-center card-hover transition-all-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-tasks text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">PMP</h3>
+                    <p class="text-gray-600">
+                        專案管理專業人士<br>
+                        全球最權威的專案管理證照
+                    </p>
+                </div>
+                
+                <!-- Certification Item 3 -->
+                <div class="bg-gray-50 rounded-lg shadow-custom p-6 text-center card-hover transition-all-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-shield text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">FRM</h3>
+                    <p class="text-gray-600">
+                        風險管理<br>
+                        擅長風控、企業治理
+                    </p>
+                </div>
+                
+                <!-- Certification Item 4 -->
+                <div class="bg-gray-50 rounded-lg shadow-custom p-6 text-center card-hover transition-all-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-users text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">SHRM / HRCI</h3>
+                    <p class="text-gray-600">
+                        HR最高級國際證照<br>
+                        人力資源戰略、組織發展
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold">聯繫方式</h2>
+                <div class="section-divider bg-accent"></div>
+                <p class="text-gray-300 max-w-3xl mx-auto">歡迎隨時與我聯繫，討論合作機會或諮詢服務</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <div class="bg-white rounded-lg shadow-custom p-8 text-gray-800">
+                        <h3 class="text-2xl font-bold text-primary mb-6">發送訊息</h3>
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-semibold mb-2">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="您的姓名">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-semibold mb-2">電子郵件</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="您的電子郵件">
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 font-semibold mb-2">主題</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="訊息主題">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-semibold mb-2">訊息內容</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="請輸入您的訊息內容"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-secondary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all-300 shadow-lg hover:shadow-xl">
+                                發送訊息
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="bg-gray-800 rounded-lg shadow-custom p-8 h-full">
+                        <h3 class="text-2xl font-bold mb-6">聯絡資訊</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fa fa-envelope text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">電子郵件</h4>
+                                    <p class="text-gray-300">yuna33337777@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fa fa-phone text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">電話</h4>
+                                    <p class="text-gray-300">+82 10-3123-4465</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fa fa-map-marker text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">地址</h4>
+                                    <p class="text-gray-300">首爾特別市江南區鶴洞路20街55</p>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-6">
+                                <h4 class="text-lg font-semibold mb-4">社交媒體</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center hover:bg-accent transition-all-300">
+                                        <i class="fa fa-linkedin text-white"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center hover:bg-accent transition-all-300">
+                                        <i class="fa fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center hover:bg-accent transition-all-300">
+                                        <i class="fa fa-facebook text-white"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center hover:bg-accent transition-all-300">
+                                        <i class="fa fa-instagram text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold">Hannah<span class="text-accent">.Chen</span></a>
+                    <p class="text-gray-400 mt-2">企業管理專家 | 人力資源戰略顧問</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#about" class="text-gray-400 hover:text-white transition-all-300">關於我</a>
+                    <a href="#expertise" class="text-gray-400 hover:text-white transition-all-300">專業領域</a>
+                    <a href="#experience" class="text-gray-400 hover:text-white transition-all-300">榮譽成就</a>
+                    <a href="#education" class="text-gray-400 hover:text-white transition-all-300">教育背景</a>
+                    <a href="#certifications" class="text-gray-400 hover:text-white transition-all-300">證照</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-all-300">聯繫方式</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2026 陳安婧 Hannah Chen. 保留所有權利。</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">隱私政策</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">服務條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-secondary hover:bg-accent text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all-300 opacity-0 invisible">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize AOS Animation Library
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const closeMenu = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+            
+            closeMenu.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+            
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+            
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Skill Progress Bars Animation
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.getAttribute('data-width');
+                        entry.target.style.width = width;
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => {
+                observer.observe(bar);
+            });
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !subject || !message) {
+                    alert('請填寫所有必填欄位');
+                    return;
+                }
+                
+                // Simulate form submission
+                alert('感謝您的訊息！我將盡快回覆您。');
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
